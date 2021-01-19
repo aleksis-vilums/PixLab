@@ -1,3 +1,5 @@
+import org.w3c.dom.css.Counter;
+
 public class IntArrayWorker {
 	/** two dimensional matrix */
 	private int[][] matrix = null;
@@ -83,6 +85,38 @@ public class IntArrayWorker {
 					matrix[row][col] = 3;
 			}
 		}
+	}
+
+	public int getCount(){
+		int count = 0;
+		for(int row = 0; row < matrix.length; row++){
+			for(int col = 0; col < matrix[row].length; col++){
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public int getLargest(){
+		int largest = matrix[0][0];
+
+		for (int row = 0; row < matrix.length; row++) {
+			for (int col = 0; col < matrix[0].length; col++) {
+				if(largest <= matrix[row][col]){
+					largest = matrix[row][col];
+				}
+			}
+		}
+
+		return largest;
+	}
+
+	public int getColTotal(int col){
+		int total = 0;
+		for(int colNum = 0; colNum < matrix[0].length - 1; colNum++){
+			total += matrix[colNum][col];
+		}
+		return total;
 	}
 
 }
