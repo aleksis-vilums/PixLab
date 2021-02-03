@@ -75,6 +75,33 @@ public class PictureTester
     water.fixUnderwater();
     water.explore();
   }
+
+  public static void testMirrorVerticalRightToLeft(){
+    Picture moto = new Picture("redMotorcycle.jpg");
+    moto.mirrorVerticalRightToLeft();
+    moto.explore();
+  
+  }
+
+  public static void testMirrorHorizontal(){
+    Picture moto = new Picture("redMotorcycle.jpg");
+    moto.mirrorHorizontal();
+    moto.explore();
+  }
+
+  public static void testMirrorHorizontalBotToTop(){
+    Picture moto = new Picture("redMotorcycle.jpg");
+    moto.mirrorHorizontalBotToTop();
+    moto.explore();
+  }
+
+  public static void testMirrorDiagonal(){
+    Picture beach = new Picture("beach.jpg");
+    beach.explore(); 
+    beach.mirrorDiagonal();
+    beach.explore();
+  }
+
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
@@ -83,18 +110,24 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    testZeroBlue();
-    testKeepOnlyBlue();
+    // testZeroBlue();
+    // testKeepOnlyBlue();
+
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
-    testNegate();
-    testGrayscale();
-    testFixUnderwater();
-    testMirrorVertical();
+
+    // testNegate();
+    // testGrayscale();
+    // testFixUnderwater();
+    // testMirrorVertical();
+    // testMirrorVerticalRightToLeft();
+    // testMirrorHorizontal();
+    // testMirrorHorizontalBotToTop();
+    testMirrorDiagonal();
+
     //testMirrorTemple();
     //testMirrorArms();
     //testMirrorGull();
-    //testMirrorDiagonal();
     //testCollage();
     //testCopy();
     //testEdgeDetection();
