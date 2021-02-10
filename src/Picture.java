@@ -95,6 +95,17 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void clear() {
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] rowArray : pixels) {
+			for (Pixel pixelObj : rowArray) {
+				pixelObj.setBlue(255);
+				pixelObj.setGreen(255);
+				pixelObj.setRed(255);
+			}
+		}
+	}
+
 	public void keepOnlyBlue(){
 		Pixel[][] pixels = this.getPixels2D();
 		for (Pixel[] rowArray : pixels) {
@@ -286,15 +297,46 @@ public class Picture extends SimplePicture {
 		Pixel toPixel = null;
 		Pixel[][] toPixels = this.getPixels2D();
 		Pixel[][] fromPixels = fromPic.getPixels2D();
-		for (int fromRow = 0, toRow = startRow; fromRow < fromPixels.length
-				&& toRow < toPixels.length; fromRow++, toRow++) {
-			for (int fromCol = 0, toCol = startCol; fromCol < fromPixels[0].length
-					&& toCol < toPixels[0].length; fromCol++, toCol++) {
+		for (int fromRow = 0, toRow = startRow; fromRow < fromPixels.length && toRow < toPixels.length; fromRow++, toRow++) {
+			for (int fromCol = 0, toCol = startCol; fromCol < fromPixels[0].length && toCol < toPixels[0].length; fromCol++, toCol++) {
 				fromPixel = fromPixels[fromRow][fromCol];
 				toPixel = toPixels[toRow][toCol];
 				toPixel.setColor(fromPixel.getColor());
 			}
 		}
+	}
+
+	public void copy2(Picture fromPic, int startRow, int startCol, int fromStartRow, int fromStartCol, int fromEndRow, int fromEndCol) {
+		Pixel fromPixel = null;
+		Pixel toPixel = null;
+		Pixel[][] toPixels = this.getPixels2D();
+		Pixel[][] fromPixels = fromPic.getPixels2D();
+
+		for (int fromRow = fromStartRow, toRow = startRow; fromRow < fromEndRow && toRow < toPixels.length; fromRow++, toRow++) {
+			for (int fromCol = fromStartCol, toCol = startCol; fromCol < fromEndCol && toCol < toPixels[0].length; fromCol++, toCol++) {
+				fromPixel = fromPixels[fromRow][fromCol];
+				toPixel = toPixels[toRow][toCol];
+				toPixel.setColor(fromPixel.getColor());
+			}
+		}
+	}
+	//copied three times
+	//Three different picture manipulations
+	//One mirroring
+	public void myCollage() {
+		//Three pictures 
+		Picture flower1 = new Picture("flower1.jpg");
+		Picture koala = new Picture("koala.jpg");
+		Picture robot = new Picture("robot.jpg");
+		//Copied three times
+		this.copy(flower1, 0, 0);
+		this.copy2(koala, 0, 100, 100, 200, 225, 335);
+		this.copy(robot, 0, 235);
+		//Three different manipulations
+		this.mirrorHorizontal();
+		this.zeroBlue();
+		this.grayscale();
+		this.write("collage.jpg");
 	}
 
 	/** Method to create a collage of several pictures */
@@ -322,17 +364,55 @@ public class Picture extends SimplePicture {
 	public void edgeDetection(int edgeDist) {
 		Pixel leftPixel = null;
 		Pixel rightPixel = null;
+		Pixel topPixel = null;
+		Pixel bottomPixel = null;
+
 		Pixel[][] pixels = this.getPixels2D();
 		Color rightColor = null;
-		for (int row = 0; row < pixels.length; row++) {
+		Color bottomColor = null;
+		
+		for (int row = 0; row < pixels.length - 1; row++) {
 			for (int col = 0; col < pixels[0].length - 1; col++) {
 				leftPixel = pixels[row][col];
 				rightPixel = pixels[row][col + 1];
 				rightColor = rightPixel.getColor();
-				if (leftPixel.colorDistance(rightColor) > edgeDist)
+				
+				if (leftPixel.colorDistance(rightColor) > edgeDist){
 					leftPixel.setColor(Color.BLACK);
-				else
+				} else {
 					leftPixel.setColor(Color.WHITE);
+				}
+			}
+		}
+		
+		for (int row = 0; row < pixels.length - 1; row++) {
+			for (int col = 0; col < pixels[0].length - 1; col++) {
+				topPixel = pixels[row][col];
+				bottomPixel = pixels[row + 1][col];
+				bottomColor = bottomPixel.getColor();
+				if (topPixel.colorDistance(bottomColor) > edgeDist){
+					topPixel.setColor(Color.BLACK);
+				} else {
+					topPixel.setColor(Color.WHITE);
+				}
+			}
+		}
+	}
+
+	public void edgeDetection2(){
+		this.negate();
+		Pixel[][] pixels = this.getPixels2D();
+
+		for (int row = 0; row < pixels.length; row++) {
+			for (int col = 0; col < pixels[row].length; col++) {
+				//set first row all to black and set first col all to black
+				if (row == 0 && col == 0){
+					pixels[row][pixels[row].length - 1].setColor(Color.RED);
+					pixels[pixels.length - 1][col].setColor(Color.RED);
+				}
+				//set last row all to black and last col all to black
+				pixels[row][pixels[row].length - 1].setColor(Color.RED);
+				pixels[pixels.length - 1][col].setColor(Color.RED);
 			}
 		}
 	}

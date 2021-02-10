@@ -42,84 +42,99 @@ public class PictureTester
     canvas.createCollage();
     canvas.explore();
   }
+
   
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
   {
     Picture swan = new Picture("swan.jpg");
-    swan.edgeDetection(10);
+    swan.explore();
+    swan.edgeDetection2();
     swan.explore();
   }
-
+  
   public static void testKeepOnlyBlue(){
     Picture swan = new Picture("swan.jpg");
     swan.keepOnlyBlue();
     swan.explore();
   }
-
+  
   public static void testNegate(){
     Picture beach = new Picture("beach.jpg");
     beach.negate();
     beach.explore();
   }
-
+  
   public static void testGrayscale(){
     Picture arch = new Picture("arch.jpg");
     arch.grayscale();
     arch.explore();
   }
-
+  
   public static void testFixUnderwater(){
     Picture water = new Picture("water.jpg");
     water.explore();
     water.fixUnderwater();
     water.explore();
   }
-
+  
   public static void testMirrorVerticalRightToLeft(){
     Picture moto = new Picture("redMotorcycle.jpg");
     moto.mirrorVerticalRightToLeft();
     moto.explore();
-  
+    
   }
-
+  
   public static void testMirrorHorizontal(){
     Picture moto = new Picture("redMotorcycle.jpg");
     moto.mirrorHorizontal();
     moto.explore();
   }
-
+  
   public static void testMirrorHorizontalBotToTop(){
     Picture moto = new Picture("redMotorcycle.jpg");
     moto.mirrorHorizontalBotToTop();
     moto.explore();
   }
-
+  
   public static void testMirrorDiagonal(){
     Picture beach = new Picture("beach.jpg");
     beach.explore(); 
     beach.mirrorDiagonal();
     beach.explore();
   }
-
+  
   public static void testMirrorArms(){
     Picture snow = new Picture("snowman.jpg");
     snow.explore();
     snow.mirrorArms();
     snow.explore();
   }
-
+  
   public static void testMirrorGull(){
     Picture gull = new Picture("seagull.jpg");
     gull.explore();
     gull.mirrorGull();
     gull.explore();
   }
-
-
+  
+  public static void testCopy(){
+    Picture flower = new Picture("flower1.jpg");
+    Picture wall = new Picture("wall.jpg");
+    flower.explore();
+    wall.explore();
+    wall.copy2(flower, 0, 0, 10, 10, 50, 50);
+    wall.explore();
+  }
+  
+  public static void testMyCollage(){
+    Picture collage = new Picture("640x480.jpg");
+    collage.myCollage();
+    collage.explore();
+  }
   
   /** Main method for testing.  Every class can have a main
-    * method in Java */
+   * method in Java */
   public static void main(String[] args)
   {
     // uncomment a call here to run a test
@@ -127,10 +142,10 @@ public class PictureTester
     // to run
     // testZeroBlue();
     // testKeepOnlyBlue();
-
+    
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
-
+    
     // testNegate();
     // testGrayscale();
     // testFixUnderwater();
@@ -141,11 +156,13 @@ public class PictureTester
     // testMirrorDiagonal();
     // testMirrorTemple();
     // testMirrorArms();
-    testMirrorGull();
+    // testMirrorGull();
+    // testCollage();
+    // testCopy();
+    // testMyCollage();
+    testEdgeDetection();
+    
 
-    //testCollage();
-    //testCopy();
-    //testEdgeDetection();
     //testEdgeDetection2();
     //testChromakey();
     //testEncodeAndDecode();
