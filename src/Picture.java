@@ -297,6 +297,39 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void copy2(Picture fromPic, int startRow, int startCol, int fromStartRow, int fromStartCol, int fromEndRow, int fromEndCol) {
+		Pixel fromPixel = null;
+		Pixel toPixel = null;
+		Pixel[][] toPixels = this.getPixels2D();
+		Pixel[][] fromPixels = fromPic.getPixels2D();
+
+		for (int fromRow = fromStartRow, toRow = startRow; fromRow < fromEndRow && toRow < toPixels.length; fromRow++, toRow++) {
+			for (int fromCol = fromStartCol, toCol = startCol; fromCol < fromEndCol && toCol < toPixels[0].length; fromCol++, toCol++) {
+				fromPixel = fromPixels[fromRow][fromCol];
+				toPixel = toPixels[toRow][toCol];
+				toPixel.setColor(fromPixel.getColor());
+			}
+		}
+	}
+	//copied three times
+	//Three different picture manipulations
+	//One mirroring
+	public void myCollage() {
+		//Three pictures 
+		Picture flower1 = new Picture("flower1.jpg");
+		Picture koala = new Picture("koala.jpg");
+		Picture robot = new Picture("robot.jpg");
+		//Copied three times
+		this.copy(flower1, 0, 0);
+		this.copy2(koala, 0, 100, 100, 200, 225, 335);
+		this.copy(robot, 0, 235);
+		//Three different manipulations
+		this.mirrorHorizontal();
+		this.zeroBlue();
+		this.grayscale();
+		this.write("collage.jpg");
+	}
+
 	/** Method to create a collage of several pictures */
 	public void createCollage() {
 		Picture flower1 = new Picture("flower1.jpg");

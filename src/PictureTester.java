@@ -116,6 +116,21 @@ public class PictureTester
     gull.explore();
   }
 
+  public static void testCopy(){
+    Picture flower = new Picture("flower1.jpg");
+    Picture wall = new Picture("wall.jpg");
+    flower.explore();
+    wall.explore();
+    wall.copy2(flower, 0, 0, 10, 10, 50, 50);
+    wall.explore();
+  }
+  
+  public static void testMyCollage(){
+    Picture collage = new Picture("640x480.jpg");
+    collage.myCollage();
+    collage.explore();
+  }
+
 
   
   /** Main method for testing.  Every class can have a main
